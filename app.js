@@ -1,15 +1,13 @@
-//RICHIESTA GET GESTITA DA NODE.JS
+//RICHIESTA GET GESTITA DA JS
 
 const express = require('express');
+const { funzioneGet } = require('./file')
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-app.get('/dati', (req, res) => {
-    const response = { message: 'Ciao' }
-    res.json(response)
-})
+app.post('/dati', funzioneGet)
 
 app.listen(port, () => {
     console.log(`Server Express in ascolto sulla porta ${port}`);
