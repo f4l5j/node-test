@@ -1,10 +1,10 @@
 {
-  "name": "node.js",
+  "name": "node.js_candidato",
   "version": "1.0.0",
-  "description": "node.js",
+  "description": "node.js_test ",
   "main": "app.js",
   "author": {
-    "name": "fale"
+    "name": "francesco"
   },
   "scripts": {
     "start": "node app.js"
