@@ -1,38 +1,33 @@
 'use strict';
 
-const express = require('express');
-const mysql = require('mysql');
+import express, { json } from 'express';
 const app = express();
 const port = 3000;
 
-const connection = mysql.createConnection({
-    host: 'sql.freedb.tech',
-    user: 'freedb_testo',
-    password: '6R9YqVgVeXdP@*5',
-    database: 'freedb_testdfsvsdv'
-});
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://vhkfvlsmktjwyzuqpmdc.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZoa2Z2bHNta3Rqd3l6dXFwbWRjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5NTM5MTUzMSwiZXhwIjoyMDEwOTY3NTMxfQ.OFn2kUtRIkmr1L_A8nIUkleZXLhnNPHtv4WzUwMywO0'
+const supabase = createClient(supabaseUrl, supabaseKey)
 
+app.use(json());
 
-// Connessione al database
-connection.connect((err) => {
-    if (err) {
-        console.error('Errore durante la connessione al database: ', err);
-        return;
-    }
-    console.log('Connessione al database riuscita');
-});
+const tableName = 'etichette';
 
-app.use(express.json());
+app.get('/dati', async (req, res) => {
+    try {
+        const { data, error } = await supabase.from(tableName).select('*');
 
-app.get('/dati', (req, res) => {
-    connection.query('SELECT * FROM etichette', (error, results) => {
         if (error) {
-            console.error('Errore durante la query al database:', error);
-            return;
+            console.error(error);
+        } else {
+            // Serializza i risultati in formato JSON
+            const jsonData = JSON.stringify(data, null, 2);
+            console.log(jsonData);
+            res.json(jsonData);
         }
-        res.json(results);
-        connection.end();
-    });
+    } catch (err) {
+        console.error(err.message);
+    }
 })
 
 
