@@ -22,7 +22,7 @@ connection.connect((err) => {
     console.log('Connessione al database riuscita');
 });
 
-app.use(json());
+app.use(express.json());
 
 app.get('/dati', (req, res) => {
     connection.query('SELECT * FROM etichette', (error, results) => {
