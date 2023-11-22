@@ -6,10 +6,10 @@ const app = express();
 const port = 3000;
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'zbeffore_test-candidati',
-    password: 'z@w3%5TK{6*_',
-    database: 'zbeffore_test-candidati'
+    host: 'pro.freedb.tech',
+    user: 'freedb_testo',
+    password: '6R9YqVgVeXdP@*5',
+    database: 'freedb_testdfsvsdv'
 });
 
 
