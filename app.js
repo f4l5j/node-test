@@ -1,7 +1,7 @@
 'use strict';
 
 import express, { json } from 'express';
-const cors = require('cors');
+import cors from "cors";
 const app = express();
 const port = 3000;
 import mysql from 'mysql2';
