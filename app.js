@@ -3,7 +3,7 @@
 import express, { json } from 'express';
 const app = express();
 const port = 3000;
-const mysql = require('mysql2');
+import mysql from 'mysql2';
 
 const connection = mysql.createConnection({
     host: 'sql.freedb.tech',
