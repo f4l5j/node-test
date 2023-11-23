@@ -25,7 +25,7 @@ app.get('/api/v1/dati', (req, res) => {
     connection.query('SELECT * FROM etichette', (error, results, fields) => {
         if (error) {
             console.error('Errore durante la query al database:', error);
-            res.status(500).send('Errore interno del server');
+            res.status(500).send('Errore interno del server', error);
             return;
         }
 
