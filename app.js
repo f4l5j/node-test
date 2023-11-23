@@ -3,34 +3,42 @@
 import express, { json } from 'express';
 const app = express();
 const port = 3000;
+const mysql = require('mysql2');
 
-import { createClient } from '@supabase/supabase-js'
-const supabaseUrl = 'https://vhkfvlsmktjwyzuqpmdc.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZoa2Z2bHNta3Rqd3l6dXFwbWRjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5NTM5MTUzMSwiZXhwIjoyMDEwOTY3NTMxfQ.OFn2kUtRIkmr1L_A8nIUkleZXLhnNPHtv4WzUwMywO0'
-const supabase = createClient(supabaseUrl, supabaseKey)
+const connection = mysql.createConnection({
+    host: 'sql.freedb.tech',
+    user: 'freedb_testo',
+    password: '6R9YqVgVeXdP@*5',
+    database: 'freedb_testdfsvsdv'
+});
 
-app.use(json());
-
-const tableName = 'etichette';
-
-app.get('/dati', async (req, res) => {
-    try {
-        const { data, error } = await supabase.from(tableName).select('*');
-
-        if (error) {
-            console.error(error);
-        } else {
-            // Serializza i risultati in formato JSON
-            const jsonData = JSON.stringify(data, null, 2);
-            console.log(jsonData);
-            res.json(jsonData);
-        }
-    } catch (err) {
-        console.error(err.message);
+connection.connect((err) => {
+    if (err) {
+        console.error('Errore durante la connessione al database:', err);
+        return;
     }
 })
 
+app.use(json());
+
+app.get('/api/v1/dati', (req, res) => {
+    connection.query('SELECT * FROM etichette', (error, results, fields) => {
+        if (error) {
+            console.error('Errore durante la query al database:', error);
+            res.status(500).send('Errore interno del server');
+            return;
+        }
+
+        // Elabora i risultati della query e invia la risposta
+        res.json(results);
+    });
+})
 
 app.listen(port, () => {
     console.log('Server in ascolto')
 })
+// Chiudi la connessione quando l'app viene chiusa
+process.on('SIGINT', () => {
+    connection.end();
+    process.exit();
+});
