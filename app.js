@@ -31,14 +31,10 @@ app.get('/api/v1/dati', (req, res) => {
 
         // Elabora i risultati della query e invia la risposta
         res.json(results);
+        connection.end();
     });
 })
 
 app.listen(port, () => {
     console.log('Server in ascolto')
 })
-// Chiudi la connessione quando l'app viene chiusa
-process.on('SIGINT', () => {
-    connection.end();
-    process.exit();
-});
