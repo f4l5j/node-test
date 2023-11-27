@@ -23,6 +23,10 @@ connection.connect((err) => {
 app.use(cors());
 app.use(json());
 
+app.get('/', (req, res) => {
+    res.sendFile(-__dirname + '/frontend/index.html');
+});
+
 app.get('/api/v1/dati', (req, res) => {
     connection.query('SELECT * FROM etichette', (error, results, fields) => {
         if (error) {
@@ -30,7 +34,6 @@ app.get('/api/v1/dati', (req, res) => {
             return;
         }
         else {
-            // Elabora i risultati della query e invia la risposta
             connection.end();
             res.json(results);
 

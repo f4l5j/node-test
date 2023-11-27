@@ -1,8 +1,7 @@
 function mostraLista() {
-    fetch('../api/v1/dati', {
+    fetch('https://node-test-d5r5.onrender.com/api/v1/dati', {
         method: 'GET',
         headers: {
-            // Aggiungi eventuali intestazioni necessarie
             'Content-Type': 'application/json',
             'Origin': '*',
         },
