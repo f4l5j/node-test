@@ -43,10 +43,9 @@ app.get('/', (req, res) => {
 app.get('/api/v1/dati', (req, res) => {
     connection.query('SELECT * FROM etichette', (error, results, fields) => {
         if (error) {
-            console.error('Errore durante la query al database:', error);
-            return;
+            return console.error('Errore durante la query al database:', error);
         }
-        res.json(results)
+        res.json(results);
     });
     connection.end();
 })
