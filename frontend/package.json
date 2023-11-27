@@ -1,0 +1,21 @@
+{
+  "name": "node.js_candidato",
+  "version": "1.0.0",
+  "description": "node.js_test ",
+  "main": "app.js",
+  "author": {
+    "name": "francesco"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "type":"module",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

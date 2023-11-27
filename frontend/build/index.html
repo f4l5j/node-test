@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
+    />
+    <title>DATI</title>
+  </head>
+  <body>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+    <main>
+      <section>
+        <h1>DATI ORDINI</h1>
+      </section>
+      <section>
+        <label for="filtroBrand">Filtra per Brand:</label>
+        <input type="text" id="filtroBrand" oninput="filtraTabella()" />
+
+        <label for="filtroData">Filtra per Data:</label>
+        <input type="date" id="filtroData" onchange="filtraTabella()" />
+
+        <table id="table">
+          <thead>
+            <tr>
+              <th>Etichette Brand</th>
+              <th>Ordine</th>
+              <th>Data</th>
+              <th>Nome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- I dati verranno inseriti qui dinamicamente -->
+          </tbody>
+        </table>
+        <button onclick="mostraLista()">mostra lista</button>
+      </section>
+      <section>
+        <button onclick="esporta()">ESPORTA IN CSV</button>
+      </section>
+    </main>
+    <script src="operations.js"></script>
+  </body>
+</html>
