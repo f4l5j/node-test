@@ -12,13 +12,23 @@ const app = express();
 const port = 3000;
 import mysql from 'mysql2';
 
-const connectionConfig = {
+const connection = mysql.createConnection({
     host: 'sql.freedb.tech',
     user: 'freedb_testo',
     password: '6R9YqVgVeXdP@*5',
     database: 'freedb_testdfsvsdv',
     port: 3306
-};
+});
+
+connection.connect((err) => {
+    if (err) {
+        console.error('Errore durante la connessione al database:', err);
+        return;
+    }
+    else{
+        console.log('Connessione effettuata con successo')
+    }
+})
 
 app.use(cors());
 app.use(json());
@@ -30,18 +40,15 @@ app.get('/', (req, res) => {
     res.sendFile(indexPath);
 });
 
-app.get('/api/v1/dati', async (req, res) => {
-    const query = 'SELECT * FROM your_table';
-    try {
-        const connection = await mysql.createConnection(connectionConfig);
-        const [rows, fields] = await connection.execute(query);
-        await connection.end();
-        res.json(rows);
-        console.log('Connessione eseguita. Chiusura eseguita. Dati spediti')
-    } catch (error) {
-        console.error('Errore nella query:', error.message);
-        res.status(500).json({error: 'Errore nella query'});
-    }
+app.get('/api/v1/dati', (req, res) => {
+    connection.query('SELECT * FROM etichette', (error, results, fields) => {
+        if (error) {
+            console.error('Errore durante la query al database:', error);
+            return;
+        }
+        res.json(results)
+    });
+    connection.end();
 })
 
 app.listen(port, () => {
