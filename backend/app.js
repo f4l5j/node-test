@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static('frontend'))
 
 app.get('/', (req, res) => {
-    const indexPath = path.join(__dirname, 'frontend','index.html')
+    const indexPath = path.join(__dirname, '../frontend','index.html')
     res.sendFile(indexPath);
 });
 
