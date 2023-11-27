@@ -1,6 +1,8 @@
 'use strict';
 
 import express, { json } from 'express';
+import * as bodyParser from "express";
+import * as path from "path";
 import cors from "cors";
 const app = express();
 const port = 3000;
@@ -22,9 +24,12 @@ connection.connect((err) => {
 
 app.use(cors());
 app.use(json());
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(express.static('frontend'))
 
 app.get('/', (req, res) => {
-    res.sendFile(-__dirname + '/frontend/index.html');
+    const indexPath = path.join(__dirname, 'frontend','index.html')
+    res.sendFile(indexPath);
 });
 
 app.get('/api/v1/dati', (req, res) => {
