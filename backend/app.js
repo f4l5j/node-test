@@ -45,12 +45,9 @@ app.get('/api/v1/dati', (req, res) => {
             console.error('Errore durante la query al database:', error);
             return;
         }
-        else {
-            connection.end();
-            res.json(results);
-
-        }
+        res.json(results);
     });
+    connection.end();
 })
 
 app.listen(port, () => {
