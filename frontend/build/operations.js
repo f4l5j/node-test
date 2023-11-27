@@ -1,5 +1,5 @@
 function mostraLista() {
-    fetch('https://elegant-puce-dragonfly.cyclic.app/api/v1/dati', {
+    fetch('/api/v1/dati', {
         method: 'GET',
         headers: {
             // Aggiungi eventuali intestazioni necessarie
