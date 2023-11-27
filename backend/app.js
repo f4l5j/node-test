@@ -3,6 +3,10 @@
 import express, { json } from 'express';
 import * as bodyParser from "express";
 import * as path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 import cors from "cors";
 const app = express();
 const port = 3000;
