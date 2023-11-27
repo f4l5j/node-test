@@ -1,5 +1,5 @@
 function mostraLista() {
-    fetch('https://node-test-d5r5.onrender.com/api/v1/dati', {
+    fetch('https://node-test-vb6n.onrender.com/api/v1/dati', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
