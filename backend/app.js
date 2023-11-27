@@ -20,15 +20,7 @@ const connection = mysql.createConnection({
     port: 3306
 });
 
-connection.connect((err) => {
-    if (err) {
-        console.error('Errore durante la connessione al database:', err);
-        return;
-    }
-    else{
-        console.log('Connessione effettuata con successo')
-    }
-})
+
 
 app.use(cors());
 app.use(json());
@@ -41,6 +33,16 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/v1/dati', (req, res) => {
+
+    connection.connect((err) => {
+        if (err) {
+            console.error('Errore durante la connessione al database:', err);
+            return;
+        }
+        else{
+            console.log('Connessione effettuata con successo')
+        }
+    })
     connection.query('SELECT * FROM etichette', (error, results, fields) => {
         if (error) {
             return console.error('Errore durante la query al database:', error);
